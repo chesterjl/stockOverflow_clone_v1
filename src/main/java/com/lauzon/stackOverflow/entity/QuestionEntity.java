@@ -26,6 +26,9 @@ public class QuestionEntity {
     @Column(nullable = false)
     private String description;
 
+    private String imageUrl;
+    private String imagePublicId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;

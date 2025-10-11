@@ -1,5 +1,6 @@
 package com.lauzon.stackOverflow.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lauzon.stackOverflow.dto.request.FilterRequest;
 import com.lauzon.stackOverflow.dto.request.QuestionRequest;
 import com.lauzon.stackOverflow.dto.response.QuestionResponse;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,15 +21,32 @@ public class QuestionController {
     private final QuestionServiceImpl questionService;
 
     @PostMapping
-    public ResponseEntity<QuestionResponse> createQuestion(@Valid @RequestBody QuestionRequest questionRequest) {
-        QuestionResponse savedQuestion = questionService.createQuestion(questionRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedQuestion);
+    public ResponseEntity<QuestionResponse> createQuestion(@RequestPart("request") String requestString,
+                                                           @RequestPart("image") MultipartFile image) {
+       try {
+           ObjectMapper objectMapper = new ObjectMapper();
+           QuestionRequest questionRequest = objectMapper.readValue(requestString, QuestionRequest.class);
+           questionRequest.setImageFile(image);
+           QuestionResponse savedQuestion = questionService.createQuestion(questionRequest);
+           return ResponseEntity.status(HttpStatus.CREATED).body(savedQuestion);
+       } catch (Exception e) {
+           throw new RuntimeException(e.getMessage());
+       }
     }
 
     @PatchMapping("/{questionId}")
-    public ResponseEntity<QuestionResponse> updateQuestion(@PathVariable Long questionId, @Valid @RequestBody QuestionRequest questionRequest) {
-        QuestionResponse updatedQuestion = questionService.updateQuestion(questionRequest, questionId);
-        return ResponseEntity.ok(updatedQuestion);
+    public ResponseEntity<QuestionResponse> updateQuestion(@RequestPart("request") String requestString,
+                                                           @RequestPart("image") MultipartFile image,
+                                                           @PathVariable Long questionId) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            QuestionRequest questionRequest = objectMapper.readValue(requestString, QuestionRequest.class);
+            questionRequest.setImageFile(image);
+            QuestionResponse updatedQuestion = questionService.updateQuestion(questionRequest, questionId);
+            return ResponseEntity.ok(updatedQuestion);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{questionId}")

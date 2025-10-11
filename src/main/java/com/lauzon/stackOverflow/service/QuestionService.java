@@ -5,11 +5,13 @@ import com.lauzon.stackOverflow.dto.request.QuestionRequest;
 import com.lauzon.stackOverflow.dto.response.QuestionResponse;
 import org.springframework.data.domain.Page;
 
+import java.io.IOException;
+
 public interface QuestionService {
 
-    QuestionResponse createQuestion(QuestionRequest questionRequest);
+    QuestionResponse createQuestion(QuestionRequest questionRequest) throws IOException;
 
-    QuestionResponse updateQuestion(QuestionRequest questionRequest, Long questionId);
+    QuestionResponse updateQuestion(QuestionRequest questionRequest, Long questionId) throws IOException;
 
     void deleteQuestion(Long questionId);
 

@@ -15,6 +15,9 @@ public class QuestionResponse {
     private Long id;
     private String title;
     private String description;
+    private String imageUrl;
+    private String imagePublicId;
+
     private String name;
     private Long userId;
     private LocalDateTime createdAt;
