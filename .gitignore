@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+pom.xml
+
+**/src/**/resources/
+
 ### STS ###
 .apt_generated
 .classpath
