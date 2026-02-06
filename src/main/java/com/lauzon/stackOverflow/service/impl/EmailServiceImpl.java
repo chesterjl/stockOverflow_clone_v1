@@ -13,8 +13,7 @@ public class EmailServiceImpl implements EmailService {
 
     private final JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.properties.mail.smtp.from}")
-    private String FROM_EMAIL;
+    private final String FROM_EMAIL = "no-reply@stackoverflowclone.com";
 
     @Override
     public void sendEmail(String to, String subject, String body) {
@@ -24,8 +23,15 @@ public class EmailServiceImpl implements EmailService {
             message.setTo(to);
             message.setSubject(subject);
             message.setText(body);
-            javaMailSender.send(message);
 
+            // COMMENT THIS OUT FOR NOW so you can register without crashing
+            // javaMailSender.send(message);
+
+            // Print to console instead so you can see the activation link
+            System.out.println("================ EMAIL MOCK ================");
+            System.out.println("To: " + to);
+            System.out.println("Body: " + body);
+            System.out.println("============================================");
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

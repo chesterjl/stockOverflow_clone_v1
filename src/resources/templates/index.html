@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>StackClone - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .question-card:hover { border-color: #0d6efd; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="/">StackClone</a>
+
+        <div class="d-flex">
+            <div sec:authorize="!isAuthenticated()">
+                <a href="/login" class="btn btn-outline-light me-2">Login</a>
+                <a href="/register" class="btn btn-primary">Sign Up</a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <span class="navbar-text me-3">Welcome!</span>
+                <a href="/ask" class="btn btn-primary me-2">Ask Question</a>
+                <form action="/logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4">Top Questions</h2>
+
+            <div th:each="q : ${questions}" class="card mb-3 question-card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="card-title">
+                            <a th:href="@{/question/{id}(id=${q.id})}" th:text="${q.title}" class="text-decoration-none text-dark">
+                                Question Title
+                            </a>
+                        </h5>
+                        <small class="text-muted" th:text="${#temporals.format(q.createdAt, 'MMM dd, yyyy')}">Date</small>
+                    </div>
+                    <p class="card-text text-truncate" th:text="${q.description}">
+                        Description preview...
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <span class="badge bg-secondary me-1" th:text="${q.name}">User</span>
+                        </div>
+                        <a th:href="@{/question/{id}(id=${q.id})}" class="btn btn-sm btn-outline-primary">View Answers</a>
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${questions.empty}" class="alert alert-info">
+                No questions found. Be the first to ask!
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
