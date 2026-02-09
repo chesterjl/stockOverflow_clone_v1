@@ -1,0 +1,142 @@
+.question-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+}
+
+.form-subtitle {
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.ask-question-form {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.label-desc {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.optional-tag {
+    font-weight: 400;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.ask-question-form input[type="text"],
+.ask-question-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.ask-question-form input:focus,
+.ask-question-form textarea:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.image-upload-wrapper {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    text-align: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.image-upload-wrapper:hover {
+    background: #f1f3f5;
+}
+
+.image-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #0d6efd;
+}
+
+.image-upload-label i {
+    font-size: 2rem;
+}
+
+.image-preview {
+    position: relative;
+    margin-top: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-post-question {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}

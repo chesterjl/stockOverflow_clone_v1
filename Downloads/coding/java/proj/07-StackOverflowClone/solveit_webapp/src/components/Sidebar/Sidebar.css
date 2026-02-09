@@ -1,0 +1,9 @@
+.sb-container {
+    min-width: 280px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow-y: auto;
+}
